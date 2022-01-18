@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_HOTEL_MANAGEMENTModelStoreContainer" CdmEntityContainer="DB_HOTEL_MANAGEMENTEntities">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="DB_HOTEL_MANAGEMENTModel.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Id_Comment" ColumnName="Id_Comment" />
+          <ScalarProperty Name="Opinion" ColumnName="Opinion" />
+          <ScalarProperty Name="Comment1" ColumnName="Comment" />
+          <ScalarProperty Name="Date_Comment" ColumnName="Date_Comment" />
+          <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+          <ScalarProperty Name="Id_Hotel" ColumnName="Id_Hotel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotels">
+      <EntityTypeMapping TypeName="DB_HOTEL_MANAGEMENTModel.Hotel">
+        <MappingFragment StoreEntitySet="Hotels">
+          <ScalarProperty Name="Id_Hotel" ColumnName="Id_Hotel" />
+          <ScalarProperty Name="Name_Hotel" ColumnName="Name_Hotel" />
+          <ScalarProperty Name="Address_Hotel" ColumnName="Address_Hotel" />
+          <ScalarProperty Name="City_Hotel" ColumnName="City_Hotel" />
+          <ScalarProperty Name="Stars" ColumnName="Stars" />
+          <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+          <ScalarProperty Name="Description_Hotel" ColumnName="Description_Hotel" />
+          <ScalarProperty Name="Image_Hotel" ColumnName="Image_Hotel" />
+          <ScalarProperty Name="Number_Room" ColumnName="Number_Room" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="DB_HOTEL_MANAGEMENTModel.Reservation">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="Id_Reservation" ColumnName="Id_Reservation" />
+          <ScalarProperty Name="Date_Begin" ColumnName="Date_Begin" />
+          <ScalarProperty Name="Date_End" ColumnName="Date_End" />
+          <ScalarProperty Name="Date_Reservation" ColumnName="Date_Reservation" />
+          <ScalarProperty Name="Bill" ColumnName="Bill" />
+          <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+          <ScalarProperty Name="Id_Room" ColumnName="Id_Room" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="DB_HOTEL_MANAGEMENTModel.Room">
+        <MappingFragment StoreEntitySet="Rooms">
+          <ScalarProperty Name="Id_Room" ColumnName="Id_Room" />
+          <ScalarProperty Name="Type_Room" ColumnName="Type_Room" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Id_Hotel" ColumnName="Id_Hotel" />
+          <ScalarProperty Name="Image_Room" ColumnName="Image_Room" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DB_HOTEL_MANAGEMENTModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="Roles" ColumnName="Roles" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

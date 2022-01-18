@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a18c6ec9224044a6b8d85244fa2eead6" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_HOTEL_MANAGEMENTModel.Comment" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HOTEL_MANAGEMENTModel.Hotel" Width="1.5" PointX="3.125" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HOTEL_MANAGEMENTModel.Reservation" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HOTEL_MANAGEMENTModel.Room" Width="1.5" PointX="5.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_HOTEL_MANAGEMENTModel.User" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="DB_HOTEL_MANAGEMENTModel.fk_Ct_IdC_IdH" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_HOTEL_MANAGEMENTModel.fk_Ct_IdC_IdU" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_HOTEL_MANAGEMENTModel.fk_Ht_IdH" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_HOTEL_MANAGEMENTModel.fk_Rm_IdR_IdU" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_HOTEL_MANAGEMENTModel.fk_Rs_IdR_IdR" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_HOTEL_MANAGEMENTModel.fk_Rs_IdR_IdU" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

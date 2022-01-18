@@ -1,0 +1,236 @@
+﻿@using HOTEL_MANAGEMENT.Models
+@model dynamic
+@{
+    ViewBag.Title = "DisplayHotel";
+}
+
+<link href="~/Content/StyleDetailsHotel.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
+
+<div style="padding: 5% 2%;">
+    <h2 class="text-uppercase text-center">
+        <b>
+            <em style="color: #1781A6;">@Model.Hotels.Name_Hotel hotel</em>
+        </b>
+    </h2>
+    <h4 class="text-uppercase text-center" style="padding-bottom: 2%;">
+        @for (int i = 0; i < Model.Hotels.Stars; i++)
+        {
+            <span class="text-center glyphicon glyphicon-star" style="color: orange;"></span>
+        }
+        @for (int i = Model.Hotels.Stars; i < 5; i++)
+        {
+            <span class="text-center glyphicon glyphicon-star"></span>
+        }
+    </h4>
+</div>
+
+
+<section class="section" style="/*background:#00ff21;*/ padding: 2% 2%;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-lg-7 ml-auto " style="/*background:#ff0000;*/">
+
+                <img class="img-rounded" src=@Model.Hotels.Image_Hotel alt="@Model.Hotels.Name_Hotel"><br />
+                <i class="fas fa-phone-rotary"></i>
+                <h5>
+                    <i style="color: #1781A6" class="fas fa-map-marked-alt fa-2x"></i> &nbsp; @Model.Hotels.Address_Hotel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i style="color: #1781A6" class="fad fa-phone-office fa-2x"></i> &nbsp; @Model.Hotels.Telephone
+                </h5>
+            </div>
+
+            <div class="col-md-12 col-lg-4 order-lg-1 aos-init aos-animate" style="/*background:#ff6a00*/">
+                <h2 class="heading">Welcome <em>to</em> <b style="color: #1781A6;">@Model.Hotels.Name_Hotel</b> Hotel </h2>
+                <p class="lead">@Model.Hotels.Description_Hotel</p>
+                <p class="">
+                    @*<input type="submit" value="Booking" class="btn btn-lg btn-block" style="background: #1781A6; color: white;/* */" />*@
+                    <a href="/Reservations/Create" class="btn btn-lg text-uppercase reserve" style="/*width: 90%;background: #1781A6; color: white; */" >reserve</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="d-flex justify-content-center" style="/*background:#b200ff;*/ padding: 2.5%;">
+
+    <h2 class="text-center text-dark text-uppercase mt-4" style="padding:2.5%; /*background:white*/">
+        <b style="color: #1781A6;">our gallery</b>
+    </h2>
+
+    <div class="container-fluid center-block" style="/*background:yellow;*/">
+        <div class="row" style="/*background:gray;*/ padding-bottom: 2%;">
+            @foreach (Room item in Model.Rooms)
+            {
+                @*<a class="column" href="@Url.Action("Details", "Rooms", new { id = item.Id_Room })">
+                    <img src=@item.Image_Room alt="" />
+                </a>*@
+                <a class="column" href="/Rooms/Details/@item.Id_Room">
+                    <img src=@item.Image_Room alt="" />
+                </a>
+            }
+        </div>
+        <a href="/Rooms" style="float: right;margin-right: -8px;" class="btn btn-primary">
+            <i class="far fa-eye"></i>
+            <b>See more</b>
+        </a>
+        @if (Session["Id_user"] != null && Session["Roles"]!= null && Session["Roles"].ToString().ToLower() == "true")
+        {
+            <a href="/Rooms/Create" style="float: right;margin-right: 8px;" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                <b>Add room</b>
+            </a>
+        }
+
+    </div>
+</section>
+
+
+<section style="padding: 2.5% 0%;">
+    <h2 class="text-center text-dark text-uppercase mt-4" style="padding:2.5%;">
+        <b style="color: #1781A6;">Facilities &amp; Services</b>
+    </h2>
+    <div class="container" ">
+
+        <div class="row" style="padding: 1%;">
+            <div class="col-6 col-md-4">
+                <h1 class="text-center">
+                    <i class="fas fa-swimming-pool" style="color: #1781A6;"></i>
+                </h1>
+                <h3 class="text-center">
+                    <b>Swimming pool</b>
+                </h3>
+            </div>
+            <div class="col-6 col-md-4">
+
+                <h1 class="text-center">
+                    <i class="fad fa-parking" style="color: #1781A6;"></i>
+                </h1>
+                <h3 class="text-center">
+                    <b>Car parking</b>
+                </h3>
+            </div>
+            <div class="col-6 col-md-4">
+
+                <h1 class="text-center">
+                    <i class="fas fa-utensils" style="color: #1781A6;"></i>
+                </h1>
+                <h3 class="text-center">
+                    <b>Restaurant</b>
+                </h3>
+            </div>
+        </div>
+        <div class="row" style="padding: 1%;">
+            <div class="col-6 col-md-4">
+
+                <h1 class="text-center">
+                    <i class="fas fa-glass-cheers" style="color: #1781A6;"></i>
+                </h1>
+                <h3 class="text-center">
+                    <b>Minibar</b>
+                </h3>
+            </div>
+            <div class="col-6 col-md-4">
+
+                <h1 class="text-center">
+                    <i class="fad fa-futbol" style="color: #1781A6;"></i>
+                </h1>
+                <h3 class="text-center">
+                    <b>Sports field</b>
+                </h3>
+            </div>
+            <div class="col-6 col-md-4">
+
+                <h1 class="text-center">
+                    <i class="fas fa-gamepad" style="color: #1781A6;"></i>
+                </h1>
+                <h3 class="text-center">
+                    <b>Game room</b>
+                </h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 2.5% 0%;">
+    <h2 class="text-center text-dark text-uppercase mt-4" style="padding: 2.5%; margin-bottom: 4%;">
+        <b style="color: #1781A6;">reviews</b>
+    </h2>
+    <div class="container">
+        <div class="row" style="padding: 1%;">
+
+            <div class="col-6 col-md-6">
+                <img style="width:110%; height:400px;" src="@Url.Content("~/Images/comment.png")" alt="Views folder" />
+            </div>
+
+            <div class="col-6 col-md-6" style="background: #fbfbfbfb;padding: 1% 4%; border-radius: 5%;border:solid gray 0.5px;">
+
+                <h3 class="text-center text-uppercase" style="padding: 2% 0">
+                    <b>guest reviews</b>
+                </h3>
+                <div style="padding: 0% 0">
+                    @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary()
+
+                        <input required class="form-control" style="width: 1000px; float: left;" type="text" name="comment" />
+
+                        <input class="form-control" style="width: 1000px; float: left;" type="hidden" name="id_Hotel" value=@Model.Hotels.Id_Hotel />
+
+                        <input style="float: right;" type="submit" value="Add Review" id="submitButn" class="btn btn-default" />
+                    }
+                </div>
+                <div style="padding: 4% 0%;margin-top: 12%; width:100%; height:230px; overflow:scroll;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Comment</th>
+                                <th scope="col">Prediction</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int r = 1;
+                                foreach (Comment item in Model.Comments)
+                                {
+                                    <tr>
+                                        <th scope="row">@r</th>
+                                        <td>@item.User.First_Name</td>
+                                        <td>@item.Comment1</td>
+                                        <td>
+                                            @if (item.Opinion)
+                                            {
+                                                <i style="color: mediumseagreen" class="fas fa-smile-beam fa-2x"></i>
+                                            }
+                                            else
+                                            {
+                                                <i style="color:tomato" class="fas fa-meh fa-2x"></i>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Session["Id_user"] != null && Int32.Parse(Session["Id_user"].ToString()) == item.Id_user)
+                                            {
+                                                <a href="/Comments/Edit/@item.Id_Comment" style="color: #45465F" title="Edit"><i class="fas fa-edit"></i></a>
+                                                <a href="/Comments/Delete/@item.Id_Comment" style="color: #45465F" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                            }
+                                            @if (Session["Id_user"] != null && Session["Roles"]!= null && Session["Roles"].ToString().ToLower()== "true" && Int32.Parse(Session["Id_user"].ToString()) != item.Id_user)
+                                            {
+                                                @*<a href="/Comments/Edit/@item.Id_Comment" style="color: #45465F" title="Edit"><i class="fas fa-edit"></i></a>*@
+                                                <a href="/Comments/Delete/@item.Id_Comment" style="color: #45465F" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                    r = r + 1;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @*<a href="@Url.Action("Index", "Comments")" style="float:right;color:#1781A6">See more</a>*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

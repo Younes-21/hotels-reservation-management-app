@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css?v5")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("HOTEL MANAGEMENT", "Index", "Hotels", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Hotels")</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                    @if (Session["Id_user"] != null)
+                    {
+                        <li>@Html.ActionLink("Reservations", "Index", "Reservations")</li>
+                    }
+                    @if (Session["Id_user"] != null && Session["Roles"]!= null && Session["Roles"].ToString().ToLower() == "true")
+                    {
+                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav" style="float: right;">
+                    @if (Session["Id_user"] != null)
+                    {
+                        <li>@Html.ActionLink(@Session["First_Name"].ToString(), "Details/"+ Int32.Parse(Session["Id_user"].ToString()), "Users")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Users")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Users")</li>
+                        <li>@Html.ActionLink("Register", "Create", "Users")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="text-center">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p> This project is built by</p>
+            <p> Younes Sefiani </p>
+        </footer>
+    </div>
+    <div class="navbar navbar-inverse navbar-toggle">
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

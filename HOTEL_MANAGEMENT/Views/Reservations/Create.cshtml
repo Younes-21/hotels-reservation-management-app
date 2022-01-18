@@ -1,0 +1,77 @@
+﻿@model HOTEL_MANAGEMENT.Models.Reservation
+
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<h3 class="text-center text-uppercase" style="color: #1781A6;"><b>please add your reservation</b></h3>
+
+<div style="padding: 6%;">
+    <h5 class="text-center text-uppercase text-danger"><b>@ViewBag.ErrorReservation</b></h5>
+    <table align="center">
+
+        <tr>
+            @using (Html.BeginForm("Create", "Reservations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <td>
+                    <div align="center" class="form-group">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Date_Begin, htmlAttributes: new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Date_Begin, new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Date_Begin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Date_End, htmlAttributes: new { @class = "control-label" })
+                            <div>
+                                @Html.EditorFor(model => model.Date_End, new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Date_End, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-12">
+                                <input style="margin-left: -70px;" type="submit" value="Save" class="button" />
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+                <td><div>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</div></td>
+                <td><div> <img src="~/Images/CreateReservation.png" width="300" height="300" /></div></td>
+            }
+        </tr>
+    </table>
+
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<style>
+    .button {
+        background-color: #1781A6;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        padding: 6px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

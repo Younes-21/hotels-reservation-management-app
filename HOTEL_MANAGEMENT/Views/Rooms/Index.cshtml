@@ -1,0 +1,108 @@
+﻿@model IEnumerable<HOTEL_MANAGEMENT.Models.Room>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/StyleIndexRoom.css?v.3.3.3" rel="stylesheet" type="text/css" media="screen" runat="server" />
+ 
+    @*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type_Room)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image_Room)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hotel.Name_Hotel)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type_Room)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image_Room)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hotel.Name_Hotel)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_Room }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id_Room }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id_Room })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+@*style=" border-radius: 10px; /*width: 250px; height: 170px; margin-top: 5px;*/"*@
+
+
+
+<h2 class="text-center text-primary text-uppercase" style="padding: 12px;"><b>@Session["Name_Hotel"] rooms</b></h2>
+<a style="margin-left: 5%;" href="/Hotels/Details/@Session["Id_Hotel"]" class="btn">Go back</a>
+<hr />
+@foreach (var item in Model)
+{
+    <div class="card center-block">
+        <img class="img1" src="@item.Image_Room" alt="Avatar" />
+        <div class="container">
+            <div class="row">
+                <b style="color: #1781A6;">Type of room: </b>
+                @if (item.Type_Room == 1)
+                {
+                    <span>Single</span>
+                }
+                else if (item.Type_Room == 2)
+                {
+                    <span>Double</span>
+                }
+                else if (item.Type_Room == 3)
+                {
+                    <span>Duplex</span>
+                }
+                else
+                {
+                    <span>Other</span>
+                }
+            </div>
+            <div class="row"><b style="color: #1781A6;">Price: </b> @item.Price $</div>
+            <div class="row"><b style="color: #1781A6;">Disponibility: </b> True</div>
+            @if (Session["Name_Hotel"] == null)
+            {
+                <div class="row-name"><b style="color: #1781A6;">Hotel: </b> @item.Hotel.Name_Hotel</div>
+            }
+        </div>
+        <div class="container">
+            <div class="row_action">
+                @if (Session["Roles"] != null && Session["Roles"].ToString().ToLower() == "true")
+                {
+                    <a href="/Rooms/Edit/@item.Id_Room" class="Button btn"><i class="fas fa-edit"></i> Edit </a>
+                    <a href="/Rooms/Delete/@item.Id_Room" class="Button btn"><i class="fas fa-trash-alt"></i> Delete </a>
+                }
+
+                <a href="/Reservations/Create/@item.Id_Room" class="Button btn"><i class="fas fa-arrow-alt-circle-down"></i> Reserve </a>
+                <a href="/Rooms/Details/@item.Id_Room" class="Button btn"><i class="fas fa-info"></i> Details </a>
+
+            </div>
+        </div>
+    </div>
+}

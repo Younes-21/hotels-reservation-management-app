@@ -1,0 +1,97 @@
+﻿@model HOTEL_MANAGEMENT.Models.Room
+
+@{
+    ViewBag.Title = "Create";
+}
+<link href="~/Content/StyleCreateRoom.css?v3.2.2" rel="stylesheet" type="text/css" media="screen" runat="server" />
+
+
+@using (Html.BeginForm("Create", "Rooms", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="relative row">
+        <div class="absolute1 col-md-6 col-md-6">
+            <img src="~/Images/static_Image_Creation.jpg" style="width:100%; /*height:500px*/;border-radius:1%" />
+        </div>
+        <div class="absolute2 col-md-6 col-md-6">
+            <div class="form-horizontal">
+                <h4 sstyle="color: #1781A6">Room</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Type_Room, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @*@Html.EditorFor(model => model.Type_Room, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <select class="form-control" aria-label="Default select example" name="Type_Room" required>
+                            <option value="1" selected>Single</option>
+                            <option value="2">Double</option>
+                            <option value="3">Family</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Type_Room, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<input value="13" name="Id_Hotel" hidden />*@
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Image_Room, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Image_Room, new { type = "file" })
+                            @Html.ValidationMessageFor(model => model.Image_Room, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @*image*@
+                <hr />
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="center">
+                            <div class="form-input" id="form-input">
+                                <label for="file-ip-1">Upload Image</label>
+                                <input type="file" required id="file-ip-1" accept="image/*" name="Image_Room" onchange="showPreview(event);">
+                                <div class="preview">
+                                    <img style="height: 300px;" id="file-ip-1-preview" src="">
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Image_Room, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <button type="submit" value="Create" style="width:100%" class="btn btn-primary btn-lg">submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    function showPreview(event) {
+        if (event.target.files.length > 0) {
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById("file-ip-1-preview");
+            preview.src = src;
+            preview.style.display = "block";
+        }
+    }
+</script>

@@ -1,0 +1,22 @@
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\MLModel.zip
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.deps.json
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.dll
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.pdb
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.csproj.AssemblyReference.cache
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.AssemblyInfoInputs.cache
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.AssemblyInfo.cs
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.csproj.CoreCompileInputs.cache
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.dll
+D:\etude\4IIR3\dot net\PROJET_FIN\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.pdb
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\MLModel.zip
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.deps.json
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.dll
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\bin\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.pdb
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.csproj.AssemblyReference.cache
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.AssemblyInfoInputs.cache
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.AssemblyInfo.cs
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.csproj.CoreCompileInputs.cache
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.dll
+C:\Users\sefia\source\repos\HOTEL_MANAGEMENT\HOTEL_MANAGEMENTML.Model\obj\x86\Debug\netstandard2.0\HOTEL_MANAGEMENTML.Model.pdb

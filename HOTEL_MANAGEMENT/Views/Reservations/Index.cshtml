@@ -1,0 +1,170 @@
+﻿@*@model IEnumerable<HOTEL_MANAGEMENT.Models.Reservation>*@
+@using HOTEL_MANAGEMENT.Models
+@model dynamic
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Index</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Begin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Reservation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bill)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Room.Image_Room)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.First_Name)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_Begin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_End)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_Reservation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bill)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.Image_Room)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.First_Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_Reservation }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id_Reservation }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id_Reservation })
+                </td>
+            </tr>
+        }
+    </table>*@
+
+@* --------------------------------------------------------------------------- *@
+
+
+<link href="~/Content/StyleIndexUser.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
+<h2 style="color: #1781A6;padding: 40px 0;" class="text-center text-uppercase">List of all reservations</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
+    <thead class="card">
+        <tr class="container" style="color: #1781A6;">
+            <th>
+                Image room
+            </th>
+            <th>
+                Type room
+            </th>
+            <th>
+                Hotel name
+            </th>
+            <th>
+                Bill
+            </th>
+            <th>
+                Date Begin
+            </th>
+            <th>
+                Date End
+            </th>
+            <th>
+                Date Reservation
+            </th>
+            <th>
+                User name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @for (var index = 0; index < Model.reservation.Count; index++)
+    {
+        //if (Session["Id_user"] != null && Int32.Parse(Session["Id_user"].ToString()) == item.Id_user || Session["Roles"].ToString().ToLower() == "true")
+        //{
+            <tbody class="card">
+                <tr class="container">
+
+                    <td style="padding: 2% 1%;">
+                        <img width="100" src=@Model.room[index].Image_Room />
+                    </td>
+                    <td style="padding: 2% 1%;">
+                        @if (@Model.room[index].Type_Room == 1)
+                        {
+                        <span>Single</span>
+                        }
+                        else if (@Model.room[index].Type_Room == 2)
+                        {
+                            <span>Double</span>
+                        }
+                        else if (@Model.room[index].Type_Room == 3)
+                        {
+                            <span>Family</span>
+                        }
+                    </td>
+                    <td style="padding: 2% 1%;">
+                        @Model.room[index].Hotel.Name_Hotel
+                    </td>
+                    <td style="padding: 2% 1%;">
+                        @Model.reservation[index].Bill $
+                    </td>
+                    <td style="padding: 2% 1%;">
+                        @Model.reservation[index].Date_Begin
+                    </td>
+                    <td style="padding: 2% 1%;">
+                        @Model.reservation[index].Date_End
+                    </td>
+                    <td style="padding: 2% 1%;">
+                        @Model.reservation[index].Date_Reservation
+                    </td>
+                    <td style="padding: 2% 1%;">
+                        @*@Html.DisplayFor(modelItem => item.User.First_Name)*@
+                        @Model.reservation[index].User.First_Name @Model.reservation[index].User.Last_Name
+                    </td>
+                    <td style="padding: 1.5% 0%;">
+
+                        @if (Session["Id_user"] != null && Int32.Parse(Session["Id_user"].ToString()) == Model.reservation[index].Id_user)
+                        {
+                            @*<a href="/Reservations/Details/@Model.reservation[index].Id_Reservation" class="Button btn"><i class="fas fa-info"></i></a>*@
+                            <a href="/Reservations/Delete/@Model.reservation[index].Id_Reservation" class="Button btn"><i class="fas fa-trash-alt"></i></a>
+                            <a href="/Reservations/Edit/@Model.reservation[index].Id_Reservation" class="Button btn"><i class="fas fa-edit"></i></a>
+                        }
+                        @if (Session["Id_user"] != null && Session["Roles"].ToString().ToLower() == "true" && Int32.Parse(Session["Id_user"].ToString()) != Model.reservation[index].Id_user)
+                        {
+                            @*<a href="/Reservations/Details/@Model.reservation[index].Id_Reservation" class="Button btn"><i class="fas fa-info"></i></a>*@
+                            <a href="/Reservations/Delete/@Model.reservation[index].Id_Reservation" class="Button btn disabled"><i class="fas fa-trash-alt"></i></a>
+                            <a href="/Reservations/Edit/@Model.reservation[index].Id_Reservation" class="Button btn disabled"><i class="fas fa-edit"></i></a>
+                        }
+                    </td>
+
+                </tr>
+            </tbody>
+        @*}*@
+    }
+
+</table>

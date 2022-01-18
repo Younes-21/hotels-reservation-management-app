@@ -1,0 +1,207 @@
+﻿@*@model IEnumerable<HOTEL_MANAGEMENT.Models.Hotel>*@
+@*@model HOTEL_MANAGEMENT.Models.ModelViewIndex*@
+@using HOTEL_MANAGEMENT.Models
+@model dynamic
+@{
+    ViewBag.Title = "Home Page";
+    var Today = DateTime.Now.ToString("yyyy-MM-dd");
+    var Tomorrow = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+}
+<link href="~/Content/StyleIndexHotel.css?v3.2.20.0" rel="stylesheet" type="text/css" media="screen" runat="server" />
+@*<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />*@
+
+@using (Html.BeginForm("search", "rooms", FormMethod.Get))
+{
+    <div class="row" style="background-color: #1781A6;border-radius: 8px;">
+        <div style="padding-top:5rem;padding-bottom:3rem;width:80%;margin:auto">
+            <h3 style="text-align: center; color: white; margin-top: -2px; text-transform: uppercase">Find deals on hotels, homes and much more...</h3>
+            <p style="text-align: center; color: #45465F; ">From cosy country homes to funky city flats.</p>
+            <div class="form-inline" style="width:90%;margin-left: 40px;">
+
+                <div class="form-group mb-2">
+                    <input type="search" class="form-control" required placeholder="Location" name="City" />
+                    <input type="date" class="form-control" id="Start_Day" name="StartDay" value="@DateTime.Now.ToString("yyyy-MM-dd")" min="@Today" onchange="BanDate()" />
+                    <input type="date" class="form-control" id="End_Day" name="EndDay" min="@Tomorrow" value="@Tomorrow" />
+                    <select class="form-control" aria-label="Default select example" name="TypeRoom" required>
+                        <option selected>Open this select menu</option>
+                        <option value="1">Single</option>
+                        <option value="2">Double</option>
+                        <option value="3">Family</option>
+                    </select>
+                    <button type="submit" class="btn btnn">Search</button>
+                </div>
+                <header class=" text-center" style="padding-top: 2%; color: #fff;">
+                    <h1 class="display-4 text-uppercase">Find your Way</h1>
+                    <p style=" color: #fff;" class="font-italic text-muted mb-1">Travelling is the best way to learn new things, whether it be a new language or new culture because you’re experiencing it first hand instead of just reading or looking at pictures. It broadens your view of the world.</p>
+                </header>
+            </div>
+        </div>
+    </div>
+
+}
+@*<section class="py-5 header text-center" style="padding-top: -2%; color: #1781A6">
+    <div class="container py-4">
+        <header>
+            <h1 class="display-4 text-uppercase">Find your Way</h1>
+            <p class="font-italic text-muted mb-1">Travelling is the best way to learn new things, whether it be a new language or new culture because you’re experiencing it first hand instead of just reading or looking at pictures. It broadens your view of the world.</p>
+        </header>
+    </div>
+</section>*@
+<h3 class="text-center text-uppercase" style="padding-top:5%; color: #1781A6 "><strong>Browse by property Hotels</strong></h3>
+<section style="padding:0% 4% 6% 20%">
+    <div class="row" style="width:100%;margin:auto">
+        @foreach (var item in Model.Hotels)
+        {
+            <a href="@Url.Action("Details", "Hotels", new { id = item.Id_Hotel })">
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding:0.5rem;margin:0rem; width:20%;height:18%">
+                    <div class="hovereffect">
+                        <img class="img-responsive" src="@item.Image_Hotel" alt="" style="width:300px;height:300px">
+                        <div class="overlay">
+                            <h2>@item.Name_Hotel</h2>
+                            <p>
+                                @item.Address_Hotel
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</section>
+<section>
+    <h3 class="text-center text-uppercase" style="padding-top:0%;padding-bottom:0%; color: #1781A6"><strong>Homes guests love</strong></h3>
+    <div class="tab1cards" style="width:100%;margin:auto">
+        <div id="wrapper" style="margin-top:0;margin-bottom:3%">
+            <div id="carousel">
+                <div id="content">
+                    @foreach (var item in Model.Rooms)
+                    {
+                        <div class="card item" style="">
+                            <a href="@Url.Action("Details", "Hotels", new { id = item.Id_Hotel })">
+                                <img src="@item.Image_Room" alt="" style="width: 250px;height:250px; border-radius:2%">
+                            </a>
+                            <a class="h5" style="" href="@Url.Action("Details", "Hotels", new { id = item.Id_Hotel })">@item.Hotel.Name_Hotel in @item.Hotel.City_Hotel</a>
+                            <p style="font-weight:bold">@item.Price MAD per night</p>
+                            <p>@(item.Type_Room  == 1 ? "Single" :( item.Type_Room == 2 ? "Double"  : (item.Type_Room == 3 ? "Family": "")))</p>
+                            <div>
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                                <span class="fa fa-star" style="color:@(item.Hotel.Stars >= 1 ? "#d4af37" : "black")"></span>
+                                <span class="fa fa-star" style="color:@(item.Hotel.Stars >= 2 ? "#d4af37" : "black")"></span>
+                                <span class="fa fa-star" style="color:@(item.Hotel.Stars >= 3 ? "#d4af37" : "black")"></span>
+                                <span class="fa fa-star" style="color:@(item.Hotel.Stars >= 4 ? "#d4af37" : "black")"></span>
+                                <span class="fa fa-star" style="color:@(item.Hotel.Stars >= 5 ? "#d4af37" : "black")"></span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button id="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0V0z" />
+                    <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
+                </svg>
+            </button>
+            <button id="next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0V0z" />
+                    <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
+                </svg>
+            </button>
+        </div>
+</section>
+
+<section class="section section-default mt-none mb-none" style="padding: 0% 0 6% 0;  color: #1781A6; margin-bottom:0%">
+    <h3 class="text-center text-uppercase" style="padding-top:0%;padding-bottom:0%"><strong>Our Partners</strong></h3>
+    <div class="container">
+        <strong>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%" src="https://1000logos.net/wp-content/uploads/2016/11/google-logo.jpg" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%" src="https://cdn.1min30.com/wp-content/uploads/2018/02/Couleur-logo-McDonalds.jpg" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%; padding-top:10%" src="https://cdn.1min30.com/wp-content/uploads/2017/09/mercedes-benz-logo.jpg" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%;height:80%; margin:auto" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Royal_Air_Maroc_logo.svg/640px-Royal_Air_Maroc_logo.svg.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%" src="https://logos-marques.com/wp-content/uploads/2021/03/Uber-Eats-Logo.png" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/2560px-Meta_Platforms_Inc._logo.svg.png" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%; padding-top:10%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/TV5Monde_Logo.svg/1280px-TV5Monde_Logo.svg.png" />
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="square-holder">
+                        <img alt="" style="width:100%;height:80%; margin:auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAA9lBMVEX///90ADtzADlyhJFqACZpACNsACpvADJtAC1uAC9vADFyADdxADVrAChsf41nAB+6mKWofY1mABtoACDi1dpCWmo7VWZkeYd2Cj/aytD38/X7+frm6Ory7O6qf4/Uwci+oKvHrbaea37m29/t5ei/xsuJQ19eAACyjJrY3N+VW3HLsrucp7BjABSNm6Xs7u96HUaqs7oqSVyEOFeEk57Fy9CSVGyjc4Wyu8GZYnd9Jkva3uG1kZ4iRFgSO1FRZXSBMFJpR2FoZnl3RF9zeYhhHEWsmKR2NlV0UmnAzNCVfY2DLFB9WXB0ZXhvL1F2dYWppa9UAAA+2t/zAAATYUlEQVR4nO1cCXujxpYFLDYBRgJJtna0S5ZkrdZm2XKmM5O86fdeZv7/n5laWQssd9LjdFLn67YtoIA63Lr33FuFBIGDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD4300q599Bz8K6p3N6H/rn30XPwSqXWeunDlXV6CztO37zmffxY+A2jhnycvpZ9/Gj4Dm3tFyy/Zn38aPgH7XySsSt6or0Ow6qq54n30bPwJqRUdVnXEkAvYKm+5n3c+fGWM7b9gPzdCW9l6fjzbcfSXQ0XTJOpX8z7XOzrbnYqGZ0eZviurSknTFF1ZNb+hYsrsvZbX56+HwCDADWK1Wh8Nh8PT0NHluNBaRg5oPtmQ4ReKsmt7G0TR787fTpLXbuxBub262W8Ad4O2pFhx0tk3Reuuhv+udoaOpitXqf9IdfyrqtTpAxgHVe01ULWxG7aOjmXl7w3UWE/WjbRh2F7LZH+uWKWlysXdd01q/VCr1+tfn2v0eaPJttxmg2qyVau8f9j3Qyamidg+rVu2hnRdNeXmVp2pOixvZlXMAsq3uzteVvfZz183Ftx33xdb5XPC8DsIU//K8wnncKnaPw9jxtZHszr2UC9SH+3GhgNvuu8fdbrg7Fr33nk9jtb2B2EJQF499/AD5+Mnzc2NR7w9zIlCh4BbOumWAP3dX9bqzcRTVkETJMMBPUTR1S+5e0VIDx+Zix7UUVc3ndU3XMBTyG2zJ51VVi5PVASeRTmlXmKs6aAj/gbamCe7PzGuy6WXeFvDlSdzFcPuTbKjOvib0uo4uirq9v8qpn3OKAXptKK6y2Q1PrqyBj5Iqn94Tr1ULNFNj+cAZXDkD8cOFIby2m+YoNAk3U6ycLMuWbqBPknKf1bP6Yfb46FsUNCmkGwKrgma1UU2nWxOqQ1sVJe3KQl9bh/YhGvZwSuRqz/sqw3s05GG2gD2asKUdvUxRBtakWBYc0QphyIAfcpalKJoVs6ymAw/It1IucU/Iald7/Wa/6m1kvMGwr/TDKfBcUx72hfZJNgD1hnddq66Nrm4NIxevLhGDppMVReuon6IWdYqFs9dpt6sgUvR6VcyWsYORo1SttqedQjF6EmKISso13tDdSffBnZnYuAztd9R8a8OcAvx6e5kDVFn310qFDSJFdLz4jr2M7tIep7f1cFvjLfWIpouOMI/pJ1GxpSgpQ35oxsgSagZuoRfZLa7AVNadglA95SQ4oK9WVW95zBXjVs+ILVFOGyBgiOBnnO5whJrL9lMB2hY+h7lj798lyBKq+MZEh2VajcEK+agVcVTEU0FfhZxVY7GoHW15B3wWHNDm9VQJO8yVy2xRxIbjeimNqznikfKpz7hOyNqn3sGQEC46bPd4TJIlnIgxMu56y4qDkYh4+x+6pbeBGAUnNvM/wdxn8DRppN6gDw93V0/py1fcEScl8OCHDrsSl1o+6vY7ZPVtkTLOHu9dNUnWGD9indHiJpus29ubXzW7KxRABBRN9wtOFSFb7zpAHIhEKZ+yv4d7YnxNbU1UAusZI1CyUk2vCMK2ik+iMw9gkdXR0gf3ZDULNMMsNBjJWDxperV0D6UdDIYfwAM2DSVV4pMDckwuWnlR85R3XDwmK1UY1G1J2rQwWxbTxe8ZZLWV9zxhGnpGflc7umAY6/mPVUD7DrGL1CNK2JUaS9ZOWQJdwMEq3cW/Y1kgnirTHrlKXNojsMiaKtmPIBWeI0lvBjyjnO5F2Siq716TSEKZkfmAfmoeve9Up/QOWZIE/d0SX8VmDYsigywiWRgjYtF4hmggLABqtVCBBqkhdC3tw0UYErRzGWkpcaWszoqS5NahfeGOpjjIbLKAboCPinSe+dRYZOEImYif9dUtde/xPBBGwdtlkIepxTHM9KdTIJ5BZpBOAAWJ/JKccQzxDpLB6ieigJgnMDImssl6M1CorTnpd8IiCz+ghDLb3t5k4GfJEAOoeR1k54oCU87RfwIub7azpwwiiNWkqUGEJtF/boL8jSGi7KyHlZQksk+QSVbJJVcnpqIxIg2DrAK2kHncTz5n6Iab3/KSyIKhO2cgV0FmnUEDkEmY6RR9Q0DISkQq2E/skIlCzLGDSyZZINjiZsTIWYEkSRYRNPI5eXDj6UAxoModSvdJ478USTXEKDRZlp3l+KrJLuwo0jUSwtJgP3NgC4RAmiAyY1kmWSAaUxKk1ECSIKunw2Ml90OZYccVdW8TZUub9vvXFoWJXhStzBofkQZ67DECQSqp0fMwY1kmWcW87+pI6YHhEmJk9VsO5Ep1PjRRVQBO0Sr56RmG+QGZ1icjLJdZF6JjNRaogCDVC+TvI3bxbPWQQRZkmQZRkkswMisSQMThQ3e/P967wNGamtNljJ3604qU/MJFP1hJLsKuOoJgSFLYcSnX67Qe4VnOFP1ssupAAzt0joE+MKZ6yCAL+OmAYJJnJtUDJcswVVU1YV+tocea3niC3h0Hvphv/wk6CuUEdFb+dAqzpf1CpxGBe5tk+fgSJSvTwQ2ZnYD9DIyYPC6mesggC4y8oNpJKjVJ9UDIkmSiCsFwYt9pqnD4FUZ9B/oRTx5T7slIvP/thuqwm+1juni4jiziFGM+C/hYObhnEsolk9HeTSWro4jmJvhICtAJxv10p0dGqnEvMBGSpGFZirmyUTDqjPokB6eQ9C9PQOe/6+apz8oehiTfiUZDkOOEU+cmDRWMuJpOFshxwtVRovoS8jfIDQvEtvRUx7x4hgW+IOEBNAgo1ScDw3vAUyxhGPL+imJ+jXQxK9uhwygWMkE/dS/0NEgBj1V7SCWrnQOmWAtOUiKmFddroUSauARiJtehjexRFvqQEXDP1ERCUN2v3rvFGiW7+I1AauhRBY88uu7ajna/vDdd26X6RU7yLqeRBQmWZNt2TXASzbH9eaC36HGhelaNhn4rZf66RtNnP4Mu0cLKiIbdJFlQxbvSvlPKGow7pjuKglqtGu8nHjPRUCyaD4kT5FLIKvkV0vhZ3Cjj4eJfmzRiZmiTx2Ty/LMlxVowyYIXULWcbQ69NCKIXzayckMizyMaCqYbEs5CETRN18k9JWVSGlkwGzR1LXwSlcl4N1yD35O6QS7Zqac7RjSkk46Bz2UMwxC01CoXqbmJdgZZpFQaSQ1BP6VlwetMp22I6bTjFYh8Sc5cpJAFRajahSdp45OAcxQJE9HKS3TCgs4nJZ9K4+42wdabn98EojDu4OHJJQOoOLjiwE0vCZK8L8tpEZcVrqXCfiYCPInIUkKYpjh4kOkkJRUZjVFNF50K8/VDMuWuD2ZUjZJFIV/ohEpo3BZCawuAZSs52bWV5WZ37BbH4NmlBztSQGd4GgpSB41Mo4BMJynWaYLo50AUbFEKD0+K9QJh3A2fHXtWPzc8Uz32flm4Goy4YGQExibedwvT6vXrq7Q0m46eOmIvMNNhzBTsidBWY9vZZEFakok3qQFG7TY+I/12rX6oBQNO8ieOSm5gVw/TUvMDKwA6xKOkTa638X4lbC7QjhkSgUxtxAs+dfYwBFyF1TsF8ZARxsnzkujnpk2ctpzQD4ugmnUY/GPoD8JQwA9XaUzNkm3nfrNDI3CKVmdkkbfBJ7RThirKW0UjsnYqbTEVcfFS1Jk0mWSBTIdZRqMpeXjfiRTU/A0esZi4IGtE66S/5gNabMrrWBHjkGCGnifrfkZZqV8N6xDJZDL6gIdWZLzAfjIzZpp0Ret3faYoBTGNPYktEsZPiU2haEBNRos6vWgi/XOIKz9GTwNxx4YmZKHk4No/Y0wIRfwY5pHew9jNXJBBXXy0YkrqQNFaFxzd7OURhSTjVE8EB/kDMbqaZRFe5nADDN2ni2oRz2ERBE0rj2SjZWdJToHmTqK6SRDQReYuzSN3BPuZsn6oS0RlZJEZkTVRsqDjYLg9IagBmgHjDDHYoa47VjBZTAa49j54+m/dcM50WQCxwKMceDF0U8BnubZ+Gh73rTNUfNXSe+X4koycgqlHo0sJT7KZsTQb9pM9ze5H6kioJFNpEX5hRGLPcQdrTQLGadE6/DCpmzZTV6K2R/clkppLeGx1bCf/YIboUovT0gfWZWM035DjknKhpfLVHTJ1SR5GQw6KvGmz/TS3CCtwItQiyRyMeQk9RjtJc1HKeJ1FFl13IOoZi+SqZPpXhs+2+vWIljhvAraM4bjT/sgydgxPRrmdodjDVsHzxg85y0SfjXjEgv1MnamnDiesNonbN0I+EfWUPbsh+DVAn/EaLXtEntqZlvCiSeJiMNtuyXLuf2JvLJpfDqgO/w80LTbQgpzdyCMB7yjL4Q6NRO+qVar1s57Lo/XKKsyKTeL0E8G9P1IU3UmbDWrO8zAv1vR50LGCDDfpemg50d4FWXPKKAT5gYVPIhfpSWFUB+eMupN7kshro9DdHCLpIU52zLdoRf5foShJADND5ONH1y5BqraWTg7cVF7P46lbSUyS0im02176BFKrWAB5caewD1juFIHamwJj9bfU9532dJw6kdU/jnELMsD63UIHnPN8jJJVQptB/n3uBuNoFi08/JKXDO1LbArj5t9mgi2CzKn5OOqlNnyRYXy2sGiWdz/ai4mTmT/9AI3sJ/WX38LvWOB5sftICQ7pBg0tsh9903s1zROZ8nSy6oI/Kqq+2pIUW9s87MdeB62l+dbXh7pEBuB3gP5iaJHowHI034SOQ99jePik97W+I76SgShZ97v92ZtWS/2PlB+S6ItE/6qpK7v/lFistiG3dUtfDQu/+zv4Hz+dlkyVOCw7M4d+FzuLjuzTj/Nedf2SNi8dWd2d1A/sNwGuR4EMRdFw9tRKn+gEd6PxXIezmo1nuPoJbaBvaTfoAvxn9Mdhgvc+h7fWQBZHN9TQv6tRq8LXOdP2HhJvz8UXS0Jbe4vrB+13f9NFSaPnzI2IuF2vyb7H9Qsga7Ku3G1v1uvLQpi8rB/xrsrLBP1+fl2Bn4uXC/pZecFcHuDW2et29Yh2gPxhdKqO2G8dMIXPbrTzRiPcFPyvxmV3Y0IWsE3w9DSZS6yFX5Su+0Iey3gnNcm8HvWNgiXEnjzJQaUywH/NyhXw87lSeYa2Xwb9vpTLaM9zpYxZW63JgdCUDnRr+Q7ugWdpbNGGzvxYcobNpHGVTOa8U2fXLu3gpEBtOAeh7dvUUWlOhShIED+eT7PRckTJDtTzXQX2FWKFyGpUKhP8oQF/oIE1q1wwaxdERrmMWborr6FpDaCBobaRwVdzkmSJZvoCfYg3PS+c3ezVB6nwkDgyHtIH9DegbS8DNfK8PmA7iZE1gFsXlfIM7rlsMWuLF/hzcME2KDTWZUgeOqZSib1X1FMYZHW0dLLqTVjRyIM8+xvJIm9xGYrsaG9/mDoKJ5fbR8EfY2jQEbK2cBgKt+jn84uAWTsg+7ocGpXyAf71WF43wGiEf1bKl0nkIi09WlVAX+PopZLVbMH8GZLVZJMVmcrHPh3pBywf0Js8k1+IQ84vv4uSXLw2AC94CPlkAfM5rMtohCGDmW0BLXDfHXTvkxc4ALEnL5dvhTWKprNKuXJZhRxFVQnIguOiPe9AsjQBvQCLETjy1jxvZZN1e8UL5bf/RkldLn3W9HdhBvzVhNgJJesC+02cPrIoYGoTaG+LV0jg7SM0MWR+gMzyHfF4szVwZeuB33s3qFe1hoCGkYLIEodOzodMXyHZOCcpl02WMDkEb2f672eS1zNhZEQHHRWgirw/mCQKZBYXbCe+ZTVuqBtDo3ECDQ/69BXkpfECdtUr5Ru0/84/UqitwHnWWGn1JEv3yXqToV7YWJgsOaf4cHU8HdCejwX3PbKuw36++V5fObOqrF9fX4EtQc4CnwW4wMNMeALUbaG7gj79Ag3wsfLy+voCmmB5SoYwPR0OCKV5btjxfdZRg2S9wa+S87ToErqWhtTQVJZ08Y8hS/h+ZYIK7Fu9htXDiuqsCeCovCVHlB/XDbS5PIOatfZyAFKw3iBRYRUhCxgaavZVOQu9HCXLsyBZJ0xWdBqvqqD5sPbu4cG8mqyFL0+RNs38Cp8/EAMiwWdIGcwCsqDTx+5nWyZGdrlU4MibEb1/W67Am/TJwsNvi9gXFLkp9HN0MQgmawnJikuHtuKLVBtSdA1Zi0t8fdvlgl5qGnzfYsrlFv9uIBeEyZpg6VAuVxCRwMZW6JgZpm89w02e8IibUbLwL6xSBdvsFrumui9CtIZ5SBZQ1q3WzjBbxRAeDJV83qvmsVjcmVdY1vMg/Pb9/5dxPb3S4HVXAW57W1mDiz6tkdMHKSIW7Wvis59RDrl6oblypQI/z1AbQPfrZbKY3GEZ0ZxrOTmnafDLUwAUZFmmqIM/NU0Ow/I/g8Mt+FkGred/xpLI04E+kclgABzVAH5uDAbIdcOnhw8ixxzgx8HBbzwYPAukjQCLTjd3tys8qpvnAoaHUCjAuQxd3ReugVA/n/+WX6HWG5fqYyylmvLv/KKZvzx2o9MUfv96qVo9KayFKhwBel6/7gFF0Pw6mn/01fi/Mf56UyQcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBw/PP4PyFsPVHvcFoIAAAAASUVORK5CYII=" />
+                    </div>
+                </div>
+            </div>
+        </strong>
+    </div>
+</section>
+
+
+
+
+@*script*@
+<script>
+    function BanDate() {
+        var Start_Day = document.getElementById("Start_Day").value;
+        document.getElementById("End_Day").placeholder == Start_Day;
+        document.getElementById("End_Day").setAttribute("min", Start_Day);
+    }
+    const gap = 18;
+
+    const carousel = document.getElementById("carousel"),
+        content = document.getElementById("content"),
+        next = document.getElementById("next"),
+        prev = document.getElementById("prev");
+
+    next.addEventListener("click", e => {
+        carousel.scrollBy(width + gap, 0);
+        if (carousel.scrollWidth !== 0) {
+            prev.style.display = "flex";
+        }
+        if (content.scrollWidth - width - gap <= carousel.scrollLeft + width) {
+            next.style.display = "none";
+        }
+    });
+    prev.addEventListener("click", e => {
+        carousel.scrollBy(-(width + gap), 0);
+        if (carousel.scrollLeft - width - gap <= 0) {
+            prev.style.display = "none";
+        }
+        if (!content.scrollWidth - width - gap <= carousel.scrollLeft + width) {
+            next.style.display = "flex";
+        }
+    });
+
+    let width = carousel.offsetWidth;
+    window.addEventListener("resize", e => (width = carousel.offsetWidth));
+
+
+
+</script>

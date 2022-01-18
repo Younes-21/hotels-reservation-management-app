@@ -1,0 +1,123 @@
+﻿@model HOTEL_MANAGEMENT.Models.Hotel
+
+@{
+    ViewBag.Title = "Create";
+}
+<hr />
+<div>
+    <table align="center">
+        <tr>
+            @using (Html.BeginForm("Create", "Hotels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <td>
+                    <div align="center" class="form-group">
+
+
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name_Hotel, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Name_Hotel, new { htmlAttributes = new { placeholder = " Nom Hotel", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name_Hotel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address_Hotel, htmlAttributes: new { @class = "control-label col-md-5 " })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Address_Hotel, new { htmlAttributes = new { placeholder = "Adresse Hotel", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Address_Hotel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.City_Hotel, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.City_Hotel, new { htmlAttributes = new { placeholder = "Ville Hotel", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.City_Hotel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Stars, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Stars, new { htmlAttributes = new { placeholder = "Nombre d'étoiles", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Stars, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description_Hotel, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Description_Hotel, new { htmlAttributes = new { placeholder = "Description de l'hotel", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description_Hotel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Number_Room, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Number_Room, new { htmlAttributes = new { placeholder = "Nombre de chambres", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Number_Room, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { placeholder = "Ajouter un numéro", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Image_Hotel, htmlAttributes: new { @class = "control-label col-md-5 " })
+                            <div class="col-md-7">
+                                @Html.EditorFor(model => model.Image_Hotel, new { htmlAttributes = new { type = "file", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Image_Hotel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="button" />
+
+                        </div>
+                    </div>
+                </td>
+                <td><div>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</div></td>
+                <td><div> <img style="border-radius: 7px;" src="~/Images/CreateHotel.jpeg" width="350" height="325" /></div></td>
+            }
+        </tr>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<style>
+    .button {
+        background-color: #1781A6;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        padding: 6px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+   
+</style>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

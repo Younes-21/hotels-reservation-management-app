@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_HOTEL_MANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="Id_Comment" />
+    </Key>
+    <Property Name="Id_Comment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Opinion" Type="bit" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="400" Nullable="false" />
+    <Property Name="Date_Comment" Type="datetime" Nullable="false" />
+    <Property Name="Id_user" Type="int" Nullable="false" />
+    <Property Name="Id_Hotel" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hotels">
+    <Key>
+      <PropertyRef Name="Id_Hotel" />
+    </Key>
+    <Property Name="Id_Hotel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name_Hotel" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Address_Hotel" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="City_Hotel" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Stars" Type="int" Nullable="false" />
+    <Property Name="Id_user" Type="int" />
+    <Property Name="Service_Hotel" Type="varchar" MaxLength="400" Nullable="false" />
+    <Property Name="Description_Hotel" Type="varchar" MaxLength="400" Nullable="false" />
+    <Property Name="Image_Hotel" Type="varchar" MaxLength="2000" />
+    <Property Name="Number_Room" Type="int" />
+    <Property Name="Telephone" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="Id_Reservation" />
+    </Key>
+    <Property Name="Id_Reservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date_Begin" Type="datetime" Nullable="false" />
+    <Property Name="Date_End" Type="datetime" Nullable="false" />
+    <Property Name="Date_Reservation" Type="datetime" Nullable="false" />
+    <Property Name="Bill" Type="float" Nullable="false" />
+    <Property Name="Id_user" Type="int" Nullable="false" />
+    <Property Name="Id_Room" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rooms">
+    <Key>
+      <PropertyRef Name="Id_Room" />
+    </Key>
+    <Property Name="Id_Room" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type_Room" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Id_Hotel" Type="int" Nullable="false" />
+    <Property Name="Image_Room" Type="varchar" MaxLength="2000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id_user" />
+    </Key>
+    <Property Name="Id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="First_Name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Pwd" Type="varchar" MaxLength="200" />
+    <Property Name="Roles" Type="bit" />
+  </EntityType>
+  <Association Name="fk_Ct_IdC_IdH">
+    <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotels">
+        <PropertyRef Name="Id_Hotel" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="Id_Hotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Ct_IdC_IdU">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id_user" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="Id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Ht_IdH">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Hotels" Type="Self.Hotels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id_user" />
+      </Principal>
+      <Dependent Role="Hotels">
+        <PropertyRef Name="Id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Rm_IdR_IdU">
+    <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+    <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotels">
+        <PropertyRef Name="Id_Hotel" />
+      </Principal>
+      <Dependent Role="Rooms">
+        <PropertyRef Name="Id_Hotel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Rs_IdR_IdR">
+    <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="Id_Room" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="Id_Room" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Rs_IdR_IdU">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id_user" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="Id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_HOTEL_MANAGEMENTModelStoreContainer">
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hotels" EntityType="Self.Hotels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Ct_IdC_IdH" Association="Self.fk_Ct_IdC_IdH">
+      <End Role="Hotels" EntitySet="Hotels" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Ct_IdC_IdU" Association="Self.fk_Ct_IdC_IdU">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Ht_IdH" Association="Self.fk_Ht_IdH">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Hotels" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Rm_IdR_IdU" Association="Self.fk_Rm_IdR_IdU">
+      <End Role="Hotels" EntitySet="Hotels" />
+      <End Role="Rooms" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Rs_IdR_IdR" Association="Self.fk_Rs_IdR_IdR">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Rs_IdR_IdU" Association="Self.fk_Rs_IdR_IdU">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

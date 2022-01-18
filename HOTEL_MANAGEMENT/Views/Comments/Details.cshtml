@@ -1,0 +1,58 @@
+﻿@model HOTEL_MANAGEMENT.Models.Comment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Opinion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opinion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hotel.Name_Hotel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.Name_Hotel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.First_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Comment }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

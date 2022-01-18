@@ -1,0 +1,22 @@
+﻿.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 46%;
+    border-radius: 8px;
+    margin-left: 7%;
+    overflow: hidden;
+}
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+.img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.container {
+    padding: 2px 16px;
+    overflow: hidden
+}

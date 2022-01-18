@@ -1,0 +1,59 @@
+﻿@model HOTEL_MANAGEMENT.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+<link href="~/Content/StyleLogin.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
+@*<h2>Login</h2>*@
+
+<section class="section_one" style="/*background:#00ff21;*/ /*background: #ebebeb; margin: 2% 0; padding: 2% 6%; border: solid 1px black; min-height: 692px;*/">
+    <div class="container_one">
+        <h2 class="text-center" style="color: #1781A6; font-weight: bold; ">LOGIN</h2>
+        <div class="wrapper">
+            <div class="row row_one">
+                <div class="col-md-12 col-lg-7" style="/*background:#ff0000;*/">
+                    <img style="margin-left: 15px;" class="img" src="@Url.Content("~/Images/login.png")" alt="Login" />
+                </div>
+
+                <div class="col-md-12 col-lg-5 column1"  style="margin-left: -19px;">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4 class="text-center" style="color: #1781A6;">User</h4>
+                        <hr />
+
+                        <div class="form-group" style="padding: 0 10%;">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                            <div class="">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group" style="padding: 0 10%;">
+                            @Html.LabelFor(model => model.Pwd, htmlAttributes: new { @class = "control-label" })
+                            <div class="">
+                                @Html.EditorFor(model => model.Pwd, new { htmlAttributes = new { type = "password", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Pwd, "", new { @class = "text-danger" })
+                            </div><br />
+                            <span class="alert-danger">@ViewBag.MessageError</span>
+                        </div>
+
+                        <div class="form-group" style="padding: 2% 10%;">
+                            <div @*class="col-md-offset-2 col-md-10"*@>
+                                <input type="submit" value="Login" class="btn btn-default btn-lg btn-block" style="background: #1781A6; color: white; " /><br />
+                                @*<span class="alert-danger">@ViewBag.MessageError</span>*@
+                                <h5 class="text-center">
+                                    @Html.ActionLink("Create a new account ?", "Create")
+                                </h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
